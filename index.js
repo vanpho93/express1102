@@ -1,34 +1,9 @@
 let express = require('express');
 let app = express();
 app.listen(3000, () => console.log('Server started'));
-
+let PhepTinh = require('./PhepTinh1.js');
 let handle = (req, res) => {
   res.send('Hello')
-}
-
-class PhepTinh {
-  constructor(pt, soa, sob) {
-    this.pt = pt;
-    this.soa = soa;
-    this.sob = sob;
-  }
-  getResult(){
-    let chuoi = `${this.soa} ${this.getPt(this.pt)} ${this.sob}`;
-    let kq = eval(chuoi);
-    return `${chuoi} = ${kq}`;
-  }
-  getPt(str){
-    switch (str) {
-      case 'cong':
-        return '+';
-      case 'tru':
-        return '-';
-      case 'nhan':
-        return '*';
-      case 'chia':
-        return '/';
-    }
-  }
 }
 
 app.get('/', handle);
@@ -39,9 +14,8 @@ app.get('/admin', (req, res) => {
 
 
 app.get('/show/:id/:name', (req, res) => {
-  let myId = req.params.id;
-  let name = req.params.name;
-  res.send('Toi nhan duoc id = ' + myId + name);
+  let {name, id} = req.params;
+  res.send('Toi nhan duoc id = ' + id + name);
 });
 
 app.get('/:pt/:a/:b', (req, res) => {
